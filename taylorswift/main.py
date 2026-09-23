@@ -68,7 +68,7 @@ def taylorswift():
 		i+=1
 
 	texts: list[str] = _pase_answer_texts(os.path.join(PACKAGEDIR, 'answertext.txt'))
-	print(texts)
+	
 	######################################################################################
 	print('''
 	    For these first four questions, if you are in a relationship, answer them with respect to your current relationship. If you are not currently in a relationship, answer them by considering either your most recent past relationship, or a potential relationship on the horizon, whichever you prefer.
