@@ -25,7 +25,7 @@ def _pase_answer_texts(file_path: str) -> list[str]:
 		lines_extra = answer_file.readlines()
 
 	# Strip out extraneous #\r eol sequences
-	return list(map(lambda line : line[:-3] if line[-3:-2] == "#\r" else line, lines_extra))
+	return list(map(lambda line : line.replace('#\r', ''), lines_extra))
 
 
 def taylorswift():
@@ -35,6 +35,7 @@ def taylorswift():
 		data=[row for row in csv.reader(f,delimiter=',')]
 
 	numsongs=180
+	
 
 	title=[0]*numsongs
 	album=[0]*numsongs
@@ -67,7 +68,7 @@ def taylorswift():
 		i+=1
 
 	texts: list[str] = _pase_answer_texts(os.path.join(PACKAGEDIR, 'answertext.txt'))
-
+	print(texts)
 	######################################################################################
 	print('''
 	    For these first four questions, if you are in a relationship, answer them with respect to your current relationship. If you are not currently in a relationship, answer them by considering either your most recent past relationship, or a potential relationship on the horizon, whichever you prefer.
