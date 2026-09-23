@@ -5,6 +5,32 @@ from . import PACKAGEDIR
 
 __all__ = ['taylorswift']
 
+
+def _pase_answer_texts(file_path: str) -> list[str]:
+	"""
+	A simple function that replaces the numpy textloads which was
+	having issues with the formatting of the answertext.txt file.
+
+	Probably should have some sort of better error handling, and
+	ideally check the number of lines coresponds to the grades.
+
+	This is a simple helper file for the answertex.txt file, and
+	sets the line break to be backslash n's. Why not #'s?
+	Not all the lines in the answer text end with a # after 150 lines or so,
+	so there's one song that will give you a massive output of a ton of other songs,
+	and certian higher n songs would also break because they will not have a 
+	cooresponding quote
+	
+	:param file_path: Path to the taylor swift answer text files
+	:returns: A list of each file in with open()
+	"""
+	with open(file_path) as answer_file:
+		lines_extra = answer_file.readlines()
+
+	# Strip out extraneous # eol characters
+	return list(map(lambda line : line[:-1] if line[-1] == "#" else line, lines_extra))
+
+
 def taylorswift():
 	data=[]
 
@@ -43,7 +69,7 @@ def taylorswift():
 		together[i]=float(set[11])
 		i+=1
 
-	texts=np.loadtxt(os.path.join(PACKAGEDIR, 'answertext.txt'),delimiter='#',dtype='str')
+	texts: list[str] = _pase_answer_texts(os.path.join(PACKAGEDIR, 'answertext.txt'))
 
 	######################################################################################
 	print('''
@@ -180,7 +206,7 @@ def taylorswift():
 	print('Here are the top five songs that match your mood:')
 	for x,item in enumerate(finalok):
 	    n=x+1
-	    print(str(n)+': '+title[item])
+	    print(f'{str(n)}: {title[item]}')
 	    print(texts[item])
 
 
