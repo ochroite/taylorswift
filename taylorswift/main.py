@@ -10,13 +10,10 @@ def _pase_answer_texts(file_path: str) -> list[str]:
 	"""
 	A simple function that replaces the numpy textloads which was
 	having issues with the formatting of the answertext.txt file.
+	This handles the chaos of whatever lf/clrf thing is going on there
 
-	Probably should have some sort of better error handling, and
-	ideally check the number of lines coresponds to the grades.
-
-	This is a simple helper file for the answertext.txt file, and
-	handles the chaos of whatever lf/clrf thing is going on there.
-	Perhaps it was made og on a windows computer, and then a macos device later?
+	Perhaps it was made og on a windows computer, and then edited on 
+	a macos/linux device later?
 	
 	:param file_path: Path to the taylor swift answer text files
 	:returns: A list of each file in with open()
@@ -68,7 +65,7 @@ def taylorswift():
 		i+=1
 
 	texts: list[str] = _pase_answer_texts(os.path.join(PACKAGEDIR, 'answertext.txt'))
-	
+
 	######################################################################################
 	print('''
 	    For these first four questions, if you are in a relationship, answer them with respect to your current relationship. If you are not currently in a relationship, answer them by considering either your most recent past relationship, or a potential relationship on the horizon, whichever you prefer.
