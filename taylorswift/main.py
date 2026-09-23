@@ -14,21 +14,18 @@ def _pase_answer_texts(file_path: str) -> list[str]:
 	Probably should have some sort of better error handling, and
 	ideally check the number of lines coresponds to the grades.
 
-	This is a simple helper file for the answertex.txt file, and
-	sets the line break to be backslash n's. Why not #'s?
-	Not all the lines in the answer text end with a # after 150 lines or so,
-	so there's one song that will give you a massive output of a ton of other songs,
-	and certian higher n songs would also break because they will not have a 
-	cooresponding quote
+	This is a simple helper file for the answertext.txt file, and
+	handles the chaos of whatever lf/clrf thing is going on there.
+	Perhaps it was made og on a windows computer, and then a macos device later?
 	
 	:param file_path: Path to the taylor swift answer text files
 	:returns: A list of each file in with open()
 	"""
-	with open(file_path) as answer_file:
+	with open(file_path, newline="\n") as answer_file:
 		lines_extra = answer_file.readlines()
 
-	# Strip out extraneous # eol characters
-	return list(map(lambda line : line[:-1] if line[-1] == "#" else line, lines_extra))
+	# Strip out extraneous #\r eol sequences
+	return list(map(lambda line : line[:-3] if line[-3:-2] == "#\r" else line, lines_extra))
 
 
 def taylorswift():
